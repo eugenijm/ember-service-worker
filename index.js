@@ -73,6 +73,7 @@ module.exports = {
       fingerprint: this.app.options.fingerprint.enabled,
       plugins,
       rootURL: this._getRootURL(),
+      scope: this._getScope(),
       sourcemaps: this.app.options.sourcemaps,
       registrationDistPath: options.registrationDistPath,
       serviceWorkerFilename: options.serviceWorkerFilename
@@ -147,6 +148,13 @@ module.exports = {
     let rootURL = options.rootUrl || config.rootURL || config.baseURL || '/';
 
     return this._projectRootURL = rootURL;
+  },
+
+  _getScope() {
+    let options = this._getOptions();
+    let config = this._getConfig();
+
+    return options.scope || config.scope || this._getRootURL();
   },
 
   _getOptions() {
